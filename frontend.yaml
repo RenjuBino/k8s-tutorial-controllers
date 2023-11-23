@@ -12,7 +12,7 @@ spec:
     targetPort: 5000
 ---
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
   name: frontend
   labels:
@@ -22,6 +22,10 @@ spec:
   selector:
     matchLabels:
       app: frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 33%
+      maxUnavailable: 33%
   template:
     metadata:
       labels:
